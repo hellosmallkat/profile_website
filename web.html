@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- The title of the webpage -->
+    <title>Profile App</title>
+    <style>
+        /* CSS styles for the banner class */
+        .banner {
+            width: 100%; /* The banner takes up the full width of the page */
+            height: 200px; /* The banner has a height of 200 pixels */
+            background-color: #f5f5f5; /* The banner has a light gray background color */
+            text-align: center; /* The text in the banner is centered */
+            padding: 50px; /* The banner has a padding of 50 pixels on all sides */
+            font-size: 30px; /* The text in the banner has a font size of 30 pixels */
+        }
+    </style>
+</head>
+<body>
+    <!-- A div with the banner class, which contains the text "Profile App" -->
+    <div class="banner">Profile App</div>
+    <!-- Two divs for displaying user profiles -->
+    <div id="profile1"></div>
+    <div id="profile2"></div>
+    <!-- An iframe for displaying a Thunkable project -->
+    <iframe src="https://x.thunkable.com/projects/65c91b36e6eaee45d1a06e69/376b2050-90c8-4fba-8d3b-28413322d2b6/designer" width="100%" height="500px"></iframe>
+
+    <!-- Firebase scripts for database functionality -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDH8523Er2Q4TfLf0puqnJdoVegZBLO_Ck",
+            authDomain: "random-number-api.firebaseapp.com",
+            databaseURL: "https://random-number-api-default-rtdb.firebaseio.com",
+            projectId: "random-number-api",
+            storageBucket: "random-number-api.appspot.com",
+            messagingSenderId: "619120777208",
+            appId: "1:619120777208:web:b0f44ed5d005ea92f2680d",
+            measurementId: "G-D4924FBVWG"
+          };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firebase database
+        var database = firebase.database();
+
+        // Fetch the data for user1 from the database and display it in the profile1 div
+        database.ref('/users/user1').once('value').then(function(snapshot) {
+            document.getElementById('profile1').innerHTML = JSON.stringify(snapshot.val(), null, 2);
+        });
+
+        // Fetch the data for user2 from the database and display it in the profile2 div
+        database.ref('/users/user2').once('value').then(function(snapshot) {
+            document.getElementById('profile2').innerHTML = JSON.stringify(snapshot.val(), null, 2);
+        });
+    </script>
+</body>
+</html>
+<style>
+    /* CSS styles for the banner class */
+    .banner {
+        background-image: url('your-image-url'); /* The banner has a background image */
+        background-repeat: no-repeat; /* The background image does not repeat */
+        background-size: cover; /* The background image covers the entire banner */
+    }
+</style>
+<script>
+    // Fetch the data for profile1 from the database and display it in the profile1 div
+    database.ref('/profiles/profile1').once('value').then(function(snapshot) {
+        document.getElementById('profile1').innerHTML = JSON.stringify(snapshot.val(), null, 2);
+    });
+
+    // Fetch the data for profile2 from the database and display it in the profile2 div
+    database.ref('/profiles/profile2').once('value').then(function(snapshot) {
+        document.getElementById('profile2').innerHTML = JSON.stringify(snapshot.val(), null, 2);
+    });
+</script>
